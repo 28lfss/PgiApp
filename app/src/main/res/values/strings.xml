@@ -1,15 +1,20 @@
 <resources>
     <string name="app_name">PgiApp</string>
 
+    <!-- BOTTOM MENU -->
+    <string name="create">CREATE</string>
+    <string name="list">LIST</string>
+    <string name="qr_code">QR CODE</string>
+
     <!-- LOGIN SCREEN -->
     <string name="employee_id">ID</string>
     <string name="employee_password">PASSWORD</string>
     <string name="login_button">LOGIN</string>
 
+    <!-- CREATE OCCURRENCE -->
+    <string name="occurrence_area">Area/Local</string>
+    <string name="occurrence_description">Occurrence Description</string>
+
     <string name="new_occurrence">New Occurrence</string>
     <string name="occurrences">Ocurrences</string>
-
-    <string name="create">CREATE</string>
-    <string name="list">LIST</string>
-    <string name="qr_code">QR CODE</string>
 </resources>
