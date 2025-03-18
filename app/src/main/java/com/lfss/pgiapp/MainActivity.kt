@@ -5,6 +5,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.lfss.pgiapp.createoccurrence.CreateOccurrenceFragment
+import com.lfss.pgiapp.listoccurrences.ListOccurrencesFragment
+import com.lfss.pgiapp.qrcode.QrCodeFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
