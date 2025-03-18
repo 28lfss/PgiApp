@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
 
         val createOccurrenceFragment = CreateOccurrenceFragment()
         val listOccurrencesFragment = ListOccurrencesFragment()
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, fragment)
+            replace(R.id.menu_frame_layout, fragment)
             commit()
         }
 }
