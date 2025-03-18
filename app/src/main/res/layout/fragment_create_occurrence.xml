@@ -17,7 +17,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/occurrence_area"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="wrap_content"
         android:hint="@string/occurrence_area"
         app:layout_constraintBottom_toTopOf="@id/occurrence_description"
         app:layout_constraintTop_toBottomOf="@id/back_camera">
