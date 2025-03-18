@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/create_occurrence"
+        android:icon="@drawable/ic_create_ocurrence_24dp"
+        android:title="@string/create" />
+    <item
+        android:id="@+id/list_occurrences"
+        android:icon="@drawable/ic_list_occurrences_24dp"
+        android:title="@string/list" />
+    <item
+        android:id="@+id/qr_code"
+        android:icon="@drawable/ic_qr_code_24dp"
+        android:title="@string/qr_code" />
+</menu>
