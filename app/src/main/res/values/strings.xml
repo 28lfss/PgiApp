@@ -14,7 +14,7 @@
     <!-- CREATE OCCURRENCE -->
     <string name="occurrence_area">Area/Local</string>
     <string name="occurrence_description">Occurrence Description</string>
+    <string name="camera_image">CAMERA</string>
+    <string name="gallery_image">GALLERY</string>
 
-    <string name="new_occurrence">New Occurrence</string>
-    <string name="occurrences">Ocurrences</string>
 </resources>

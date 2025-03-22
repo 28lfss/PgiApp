@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.otaliastudios.cameraview.CameraView
-        android:id="@+id/back_camera"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/occurrence_image"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/occurrence_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/occurrence_area"
@@ -20,7 +19,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/occurrence_area"
         app:layout_constraintBottom_toTopOf="@id/occurrence_description"
-        app:layout_constraintTop_toBottomOf="@id/back_camera">
+        app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -34,7 +33,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/occurrence_description"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/occurrence_area">
+        app:layout_constraintTop_toBottomOf="@id/occurrence_image">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -42,6 +41,29 @@
             android:gravity="top" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/camera_image"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:text="@string/camera_image"
+        app:layout_constraintBottom_toTopOf="@id/gallery_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/occurrence_description"
+        />
+
+    <Button
+        android:id="@+id/gallery_image"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:text="@string/gallery_image"
+        app:layout_constraintBottom_toTopOf="@id/create_occurrence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/camera_image" />
 
     <Button
         android:id="@+id/create_occurrence"
@@ -52,6 +74,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/occurrence_description" />
+        app:layout_constraintTop_toBottomOf="@id/gallery_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
