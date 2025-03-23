@@ -42,28 +42,32 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/camera_image"
+    <FrameLayout
+        android:id="@+id/standard_bottom_sheet"
         android:layout_width="128dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:text="@string/camera_image"
-        app:layout_constraintBottom_toTopOf="@id/gallery_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/occurrence_description"
-        />
+        android:layout_height="128dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <Button
-        android:id="@+id/gallery_image"
-        android:layout_width="128dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:text="@string/gallery_image"
-        app:layout_constraintBottom_toTopOf="@id/create_occurrence"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/camera_image" />
+        <!-- Bottom sheet contents. -->
+        <Button
+            android:id="@+id/camera_image"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:text="@string/camera_image"
+
+            />
+
+        <Button
+            android:id="@+id/gallery_image"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:text="@string/gallery_image"
+            />
+
+    </FrameLayout>
+
 
     <Button
         android:id="@+id/create_occurrence"
@@ -74,6 +78,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gallery_image" />
+        app:layout_constraintTop_toBottomOf="@id/standard_bottom_sheet" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
