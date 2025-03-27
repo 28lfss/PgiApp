@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         setCurrentFragment(createOccurrenceFragment)
 
-        bottomNavigationView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.create_occurrence -> setCurrentFragment(createOccurrenceFragment)
                 R.id.list_occurrences -> setCurrentFragment(listOccurrencesFragment)
                 R.id.qr_code -> setCurrentFragment(qrCodeFragment)

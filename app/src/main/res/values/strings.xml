@@ -16,5 +16,6 @@
     <string name="occurrence_description">Occurrence Description</string>
     <string name="camera_image">CAMERA</string>
     <string name="gallery_image">GALLERY</string>
+    <string name="occurrence_image">occurrence image</string>
 
 </resources>
