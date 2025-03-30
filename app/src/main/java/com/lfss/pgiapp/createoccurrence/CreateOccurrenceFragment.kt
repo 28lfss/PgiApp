@@ -1,7 +1,6 @@
 package com.lfss.pgiapp.createoccurrence
 
 import android.Manifest
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
