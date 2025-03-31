@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lfss.pgiapp.createoccurrence.CreateOccurrenceFragment
 import com.lfss.pgiapp.listoccurrences.ListOccurrencesFragment
-import com.lfss.pgiapp.qrcode.QrCodeFragment
+import com.lfss.pgiapp.qrcodescanner.QrCodeScannerFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val createOccurrenceFragment = CreateOccurrenceFragment()
         val listOccurrencesFragment = ListOccurrencesFragment()
-        val qrCodeFragment = QrCodeFragment()
+        val qrCodeScannerFragment = QrCodeScannerFragment()
 
         setCurrentFragment(createOccurrenceFragment)
 
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.create_occurrence -> setCurrentFragment(createOccurrenceFragment)
                 R.id.list_occurrences -> setCurrentFragment(listOccurrencesFragment)
-                R.id.qr_code -> setCurrentFragment(qrCodeFragment)
+                R.id.qr_code -> setCurrentFragment(qrCodeScannerFragment)
             }
             true
         }
