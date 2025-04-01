@@ -24,8 +24,8 @@ class CreateOccurrenceFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var cameraPermissionRequestLauncher: ActivityResultLauncher<String>
-    private lateinit var getCameraImageBitMap: ActivityResultLauncher<Void?>
-    private lateinit var getGalleryImageBitMap: ActivityResultLauncher<PickVisualMediaRequest>
+    private lateinit var getCameraImage: ActivityResultLauncher<Void?>
+    private lateinit var getGalleryImage: ActivityResultLauncher<PickVisualMediaRequest>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class CreateOccurrenceFragment : Fragment() {
                     requireContext(), "Camera available",
                     Toast.LENGTH_SHORT
                 ).show()
-                getCameraImageBitMap.launch(null)
+                getCameraImage.launch(null)
             } else {
                 Toast.makeText(
                     requireContext(), "Camera not available",
@@ -47,7 +47,7 @@ class CreateOccurrenceFragment : Fragment() {
             }
         }
 
-        getCameraImageBitMap = registerForActivityResult(
+        getCameraImage = registerForActivityResult(
             ActivityResultContracts.TakePicturePreview()
         ) { image: Bitmap? ->
             image?.let {
@@ -55,7 +55,7 @@ class CreateOccurrenceFragment : Fragment() {
             }
         }
 
-        getGalleryImageBitMap = registerForActivityResult(PickVisualMedia()) { uri ->
+        getGalleryImage = registerForActivityResult(PickVisualMedia()) { uri ->
             if (uri != null) {
                 uri.let {
                     binding.occurrenceImage.setImageURI(uri)
@@ -82,7 +82,7 @@ class CreateOccurrenceFragment : Fragment() {
         }
 
         binding.galleryImage.setOnClickListener {
-            getGalleryImageBitMap.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
+            getGalleryImage.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
         }
     }
 
