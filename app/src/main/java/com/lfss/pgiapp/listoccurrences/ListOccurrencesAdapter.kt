@@ -21,8 +21,7 @@ class ListOccurrencesAdapter(
 
     override fun onBindViewHolder(viewHolder: ListOccurrencesViewHolder, position: Int) {
         val occurrence = occurrenceList[position]
-        viewHolder.areaTextView.text = occurrence.area
-        viewHolder.timeTextView.text = occurrence.description
+        viewHolder.bind(occurrence.area, occurrence.timestamp)
     }
 
     override fun getItemCount() = occurrenceList.size

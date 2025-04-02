@@ -19,12 +19,12 @@ class ListOccurrencesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val occurrenceList = listOf(
-        OccurrenceModel(null, "AREA 1", "DESCRIPTION ", null, null),
-        OccurrenceModel(null, "AREA 2", "DESCRIPTION ", null, null),
-        OccurrenceModel(null, "AREA 3", "DESCRIPTION ", null, null),
-        OccurrenceModel(null, "AREA 4", "DESCRIPTION ", null, null),
-        OccurrenceModel(null, "AREA 5", "DESCRIPTION ", null, null),
-        OccurrenceModel(null, "AREA 6", "DESCRIPTION ", null, null)
+        OccurrenceModel(null, "AREA 1", "DESCRIPTION ", null, "30/03/2025"),
+        OccurrenceModel(null, "AREA 2", "DESCRIPTION ", null, "01/04/2025"),
+        OccurrenceModel(null, "AREA 3", "DESCRIPTION ", null, "05/04/2025"),
+        OccurrenceModel(null, "AREA 4", "DESCRIPTION ", null, "09/04/2025"),
+        OccurrenceModel(null, "AREA 5", "DESCRIPTION ", null, "13/04/2025"),
+        OccurrenceModel(null, "AREA 6", "DESCRIPTION ", null, "22/04/2025")
         )
 
     override fun onCreateView(
@@ -38,13 +38,14 @@ class ListOccurrencesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = ListOccurrencesAdapter(occurrenceList) {
+        val adapter = ListOccurrencesAdapter(occurrenceList) {
             Toast.makeText(
                 requireContext(), "ITEM CLICK TEST",
                 Toast.LENGTH_SHORT
             ).show()
         }
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
     }
 
     override fun onDestroyView() {

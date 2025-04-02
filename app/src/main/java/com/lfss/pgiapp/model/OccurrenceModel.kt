@@ -7,5 +7,5 @@ class OccurrenceModel (
     val area: String,
     val description: String,
     val imageUri: Uri?,
-    val timestamp: Long?
+    val timestamp: String
 )

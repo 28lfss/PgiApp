@@ -19,4 +19,8 @@ class ListOccurrencesViewHolder(
         }
     }
 
+    fun bind(area: String, time: String) {
+        areaTextView.text = area
+        timeTextView.text = time
+    }
 }
