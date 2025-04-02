@@ -1,4 +1,6 @@
 package com.lfss.pgiapp.listoccurrences
 
-class ListOccurrencesViewModel {
+import androidx.lifecycle.ViewModel
+
+class ListOccurrencesViewModel: ViewModel() {
 }
