@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lfss.pgiapp.R
 import com.lfss.pgiapp.databinding.FragmentListOccurrencesBinding
+import com.lfss.pgiapp.model.OccurrenceModel
 import com.lfss.pgiapp.viewoccurrence.ViewOccurrenceFragment
 
 class ListOccurrencesFragment : Fragment() {
@@ -33,9 +34,9 @@ class ListOccurrencesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter =
-            ListOccurrencesAdapter(viewModel.getUserOccurrencesList("user")) { occurrence ->
+            ListOccurrencesAdapter(viewModel.getUserOccurrencesList("user")) { occurrenceData ->
                 val bundle = Bundle().apply {
-                    putString("key", "Teste")
+                    putParcelable("occurrence", occurrenceData)
                 }
                 parentFragmentManager.setFragmentResult("request_key", bundle)
 

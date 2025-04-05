@@ -1,11 +1,13 @@
 package com.lfss.pgiapp.model
 
-import android.net.Uri
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-class OccurrenceModel (
-    val id: Int?,
+@Parcelize
+data class OccurrenceModel(
+    val id: Int,
+    //val imageUri: Uri,
     val area: String,
     val description: String,
-    val imageUri: Uri?,
     val timestamp: String
-)
+) : Parcelable
