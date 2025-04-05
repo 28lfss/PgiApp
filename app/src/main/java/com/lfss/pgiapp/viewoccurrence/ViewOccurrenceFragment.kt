@@ -1,6 +1,8 @@
 package com.lfss.pgiapp.viewoccurrence
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,17 @@ class ViewOccurrenceFragment : Fragment() {
     private var _binding: FragmentViewOccurrenceBinding? = null
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().supportFragmentManager.setFragmentResultListener(
+            "request_key",
+            this
+        ) { key, bundle ->
+            val result = bundle.getString("key")
+            Log.e(TAG, result.toString())
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstaceState: Bundle?
@@ -22,6 +35,7 @@ class ViewOccurrenceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun onDestroyView() {
