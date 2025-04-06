@@ -15,16 +15,8 @@ class ViewOccurrenceFragment : Fragment() {
 
     private var occurrenceData: OccurrenceModel? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstaceState: Bundle?
-    ): View? {
-        _binding = FragmentViewOccurrenceBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         requireActivity().supportFragmentManager.setFragmentResultListener(
             "request_key",
@@ -35,6 +27,14 @@ class ViewOccurrenceFragment : Fragment() {
             binding.viewOccurrenceArea.text = occurrenceData?.area
             binding.viewOccurrenceDescription.text = occurrenceData?.description
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstaceState: Bundle?
+    ): View? {
+        _binding = FragmentViewOccurrenceBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onDestroyView() {
