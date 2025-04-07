@@ -2,6 +2,7 @@ package com.lfss.pgiapp.createoccurrence
 
 import android.Manifest
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,9 +13,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.lfss.pgiapp.databinding.FragmentCreateOccurrenceBinding
+import com.lfss.pgiapp.model.OccurrenceModel
 import kotlin.getValue
 
 class CreateOccurrenceFragment : Fragment() {
@@ -49,21 +52,22 @@ class CreateOccurrenceFragment : Fragment() {
 
         getCameraImage = registerForActivityResult(
             ActivityResultContracts.TakePicturePreview()
-        ) { image: Bitmap? ->
-            image?.let {
-                binding.occurrenceImage.setImageBitmap(image)
+        ) { imageBitmap: Bitmap? ->
+            imageBitmap?.let {
+                binding.occurrenceImage.setImageBitmap(imageBitmap)
             }
         }
 
-        getGalleryImage = registerForActivityResult(PickVisualMedia()) { uri ->
-            if (uri != null) {
-                uri.let {
-                    binding.occurrenceImage.setImageURI(uri)
+        getGalleryImage =
+            registerForActivityResult(PickVisualMedia()) { uri ->
+                if (uri != null) {
+                    val source = ImageDecoder.createSource(requireContext().contentResolver, uri)
+                    val imageBitmap = ImageDecoder.decodeBitmap(source)
+                    binding.occurrenceImage.setImageBitmap(imageBitmap)
+                } else {
+                    Log.d("PhotoPicker", "No media selected")
                 }
-            } else {
-                Log.d("PhotoPicker", "No media selected")
             }
-        }
     }
 
     override fun onCreateView(
@@ -77,12 +81,34 @@ class CreateOccurrenceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.cameraImage.setOnClickListener {
+        binding.cameraImageButton.setOnClickListener {
             cameraPermissionRequestLauncher.launch(Manifest.permission.CAMERA)
         }
 
-        binding.galleryImage.setOnClickListener {
+        binding.galleryImageButton.setOnClickListener {
             getGalleryImage.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
+        }
+
+        binding.createOccurrenceButton.setOnClickListener {
+            if (binding.occurrenceImage.drawable != null) { //TODO: Check if text inputs aren't empty
+                var createdOccurrence = OccurrenceModel(
+                    null, // ID will be appointed when added to the Database
+                    "USER UID",
+                    binding.occurrenceImage.drawable.toBitmap(),
+                    binding.occurrenceAreaInput.text.toString(),
+                    binding.occurrenceDescriptionInput.text.toString(),
+                    System.currentTimeMillis()
+                )
+                viewModel.createOccurrence(createdOccurrence)
+                Toast.makeText(
+                    requireContext(), "Occurrence Created",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            Toast.makeText(
+                requireContext(), "OCCURRENCE INCOMPLETE!!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
