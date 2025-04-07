@@ -23,6 +23,7 @@
         app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/occurrence_area_input"
             android:layout_width="match_parent"
             android:layout_height="64dp" />
 
@@ -37,6 +38,7 @@
         app:layout_constraintTop_toBottomOf="@id/occurrence_image">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/occurrence_description_input"
             android:layout_width="match_parent"
             android:layout_height="128dp"
             android:gravity="top" />
@@ -45,29 +47,29 @@
 
 
     <Button
-        android:id="@+id/camera_image"
+        android:id="@+id/camera_image_button"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:text="@string/camera_image"
-        app:layout_constraintBottom_toTopOf="@id/gallery_image"
+        app:layout_constraintBottom_toTopOf="@id/gallery_image_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/occurrence_description" />
 
     <Button
-        android:id="@+id/gallery_image"
+        android:id="@+id/gallery_image_button"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:text="@string/gallery_image"
-        app:layout_constraintBottom_toTopOf="@id/create_occurrence"
+        app:layout_constraintBottom_toTopOf="@id/create_occurrence_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/camera_image" />
+        app:layout_constraintTop_toBottomOf="@id/camera_image_button" />
 
     <Button
-        android:id="@+id/create_occurrence"
+        android:id="@+id/create_occurrence_button"
         android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
@@ -75,6 +77,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gallery_image" />
+        app:layout_constraintTop_toBottomOf="@id/gallery_image_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
