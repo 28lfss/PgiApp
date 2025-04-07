@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.lfss.pgiapp.databinding.FragmentCreateOccurrenceBinding
 import com.lfss.pgiapp.model.OccurrenceModel
-import java.time.LocalDateTime
 import kotlin.getValue
 
 class CreateOccurrenceFragment : Fragment() {
@@ -92,7 +91,7 @@ class CreateOccurrenceFragment : Fragment() {
 
         binding.createOccurrenceButton.setOnClickListener {
             if (binding.occurrenceImage.drawable != null) { //TODO: Check if text inputs aren't empty
-                var createdOccurrence: OccurrenceModel = OccurrenceModel(
+                var createdOccurrence = OccurrenceModel(
                     null, // ID will be appointed when added to the Database
                     "USER UID",
                     binding.occurrenceImage.drawable.toBitmap(),
