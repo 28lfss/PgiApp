@@ -15,7 +15,7 @@ class ListOccurrencesViewHolder(
 
     fun bind(occurrence: OccurrenceModel, onItemClicked: () -> Unit) {
         areaTextView.text = occurrence.area
-        timeTextView.text = occurrence.timestamp
+        timeTextView.text = occurrence.timestamp.toString() //TODO: format timestamp to date/time
         itemView.setOnClickListener {
                 onItemClicked()
         }

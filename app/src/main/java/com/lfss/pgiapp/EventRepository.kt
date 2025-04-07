@@ -8,15 +8,18 @@ class EventRepository{
     }
 
     fun occurrencesListByUid(userUid: String): List<OccurrenceModel> {
-        val occurrenceList = listOf(
-            OccurrenceModel(1, "AREA 1", "DESCRIPTION 1", "30/03/2025"),
-            OccurrenceModel(2, "AREA 2", "DESCRIPTION 2", "01/04/2025"),
-            OccurrenceModel(3, "AREA 3", "DESCRIPTION 3", "05/04/2025"),
-            OccurrenceModel(4, "AREA 4", "DESCRIPTION 4", "09/04/2025"),
-            OccurrenceModel(5, "AREA 5", "DESCRIPTION 5", "13/04/2025"),
-            OccurrenceModel(6, "AREA 6", "DESCRIPTION 6", "22/04/2025")
+        val occurrencesList = listOf<OccurrenceModel>(
+            OccurrenceModel(1, "User UID", null, "AREA 1", "DESCRIPTION 1", 219381912L),
+            OccurrenceModel(2, "User UID", null, "AREA 2", "DESCRIPTION 2", 219381912L),
+            OccurrenceModel(3, "User UID", null, "AREA 3", "DESCRIPTION 3", 219381912L),
+            OccurrenceModel(4, "User UID", null, "AREA 4", "DESCRIPTION 4", 219381912L),
+            OccurrenceModel(5, "User UID", null, "AREA 5", "DESCRIPTION 5", 219381912L)
         )
-        return occurrenceList
+        return occurrencesList //TODO: return List<OccurrenceModel>
+    }
+
+    fun createOccurrence(createdOccurrence: OccurrenceModel) {
+        //TODO: send occurrence to back-end
     }
 
 }
