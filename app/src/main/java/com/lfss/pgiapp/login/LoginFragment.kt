@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.lfss.pgiapp.MainActivity
 import com.lfss.pgiapp.databinding.FragmentLoginBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val viewModel: LoginViewModel by viewModels()
@@ -33,10 +35,21 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.loginButton.setOnClickListener {
-            changeActivity(
+            userLogin(
                 binding.userIdContent.text.toString(),
                 binding.passwordContent.text.toString()
             )
+        }
+
+        lifecycleScope.launch {
+            viewModel.userState.collectLatest { user ->
+                if (user != null) {
+                    Toast.makeText(this@LoginFragment.activity, "Welcome, ${user.username}!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                } else {
+                    Toast.makeText(this@LoginFragment.activity, "Login failed", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -45,9 +58,7 @@ class LoginFragment : Fragment() {
         _binding = null
     }
 
-    fun changeActivity(userId: String, userPassword: String) {
-        if(viewModel.userLogin(userId, userPassword)) {
-            startActivity(Intent(requireContext(), MainActivity::class.java))
-        }
+    fun userLogin(email: String, password: String) {
+        viewModel.userLogin(email, password)
     }
 }
