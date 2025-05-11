@@ -8,6 +8,6 @@ data class UserModel(
     val userId : Long,
     val username : String,
     val email : String,
-    val sessionToken : String,
-    val accessLevel : String
+    val sessionToken : String?, //TODO: remove nullable
+    val accessLevel : String? //TODO: remove nullable
 ) : Parcelable

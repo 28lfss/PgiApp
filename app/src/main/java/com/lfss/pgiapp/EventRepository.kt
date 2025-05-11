@@ -1,10 +1,18 @@
 package com.lfss.pgiapp
 
+import com.lfss.pgiapp.api.PgiApi
+import com.lfss.pgiapp.api.RetrofitClient
+import com.lfss.pgiapp.dto.UserLoginDTO
 import com.lfss.pgiapp.model.OccurrenceModel
+import com.lfss.pgiapp.model.UserModel
+import retrofit2.Response
 
 class EventRepository{
-    fun authenticateUserLogin(userId: String, userPassword: String): Boolean{
-        return true
+    private val api = RetrofitClient.getInstance().create(PgiApi::class.java)
+
+    suspend fun userLogin(email: String, password: String): Response<UserModel>{
+        val loginData = UserLoginDTO(email, password)
+        return api.userLogin(loginData)
     }
 
     fun occurrencesListByUid(userUid: String): List<OccurrenceModel> {
