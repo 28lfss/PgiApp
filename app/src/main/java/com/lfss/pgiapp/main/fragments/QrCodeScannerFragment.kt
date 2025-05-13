@@ -1,4 +1,4 @@
-package com.lfss.pgiapp.qrcodescanner
+package com.lfss.pgiapp.main.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -9,11 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.journeyapps.barcodescanner.ScanContract
-import com.lfss.pgiapp.databinding.FragmentQrCodeScannerBinding
 import com.journeyapps.barcodescanner.ScanOptions
-import androidx.core.net.toUri
+import com.lfss.pgiapp.databinding.FragmentQrCodeScannerBinding
 
 class QrCodeScannerFragment: Fragment() {
     private var _binding: FragmentQrCodeScannerBinding? = null

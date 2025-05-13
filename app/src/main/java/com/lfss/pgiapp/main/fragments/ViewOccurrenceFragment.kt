@@ -1,4 +1,4 @@
-package com.lfss.pgiapp.viewoccurrence
+package com.lfss.pgiapp.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

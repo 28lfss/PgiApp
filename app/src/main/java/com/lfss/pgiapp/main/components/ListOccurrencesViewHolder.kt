@@ -1,4 +1,4 @@
-package com.lfss.pgiapp.listoccurrences
+package com.lfss.pgiapp.main.components
 
 import android.view.View
 import android.widget.TextView
