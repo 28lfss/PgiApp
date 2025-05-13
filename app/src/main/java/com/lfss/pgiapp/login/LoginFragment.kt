@@ -59,7 +59,6 @@ class LoginFragment : Fragment() {
     }
 
     fun userLogin(email: String, password: String) {
-        //TODO: remove this later
-        viewModel.userLogin("test1@test.com", "test123")
+        viewModel.userLogin(email, password)
     }
 }

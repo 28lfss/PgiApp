@@ -1,6 +1,5 @@
 package com.lfss.pgiapp.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lfss.pgiapp.EventRepository
@@ -23,7 +22,6 @@ class LoginViewModel : ViewModel() {
                 if (response.isSuccessful) { // API call worked, whether good or bad
                     response.body()?.let { body ->
                         _userState.value = body
-                        Log.e("AAAAAAAAAAAAAAAAAAAAAAAA", "TESTEEEE: " + body.toString())
                     }
                 } else {
                     _userState.value = null // Login failed
