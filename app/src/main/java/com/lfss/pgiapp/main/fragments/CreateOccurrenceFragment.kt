@@ -1,4 +1,4 @@
-package com.lfss.pgiapp.createoccurrence
+package com.lfss.pgiapp.main.fragments
 
 import android.Manifest
 import android.graphics.Bitmap
@@ -12,16 +12,15 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.lfss.pgiapp.databinding.FragmentCreateOccurrenceBinding
+import com.lfss.pgiapp.main.MainViewModel
 import com.lfss.pgiapp.model.OccurrenceModel
-import kotlin.getValue
 
 class CreateOccurrenceFragment : Fragment() {
-    private val viewModel: CreateOccurrenceViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
     private var _binding: FragmentCreateOccurrenceBinding? = null
     private val binding get() = _binding!!
@@ -59,7 +58,7 @@ class CreateOccurrenceFragment : Fragment() {
         }
 
         getGalleryImage =
-            registerForActivityResult(PickVisualMedia()) { uri ->
+            registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
                 if (uri != null) {
                     val source = ImageDecoder.createSource(requireContext().contentResolver, uri)
                     val imageBitmap = ImageDecoder.decodeBitmap(source)
@@ -86,7 +85,7 @@ class CreateOccurrenceFragment : Fragment() {
         }
 
         binding.galleryImageButton.setOnClickListener {
-            getGalleryImage.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
+            getGalleryImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
         binding.createOccurrenceButton.setOnClickListener {

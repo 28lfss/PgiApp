@@ -1,4 +1,4 @@
-package com.lfss.pgiapp.listoccurrences
+package com.lfss.pgiapp.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lfss.pgiapp.R
 import com.lfss.pgiapp.databinding.FragmentListOccurrencesBinding
-import com.lfss.pgiapp.viewoccurrence.ViewOccurrenceFragment
+import com.lfss.pgiapp.main.components.ListOccurrencesAdapter
+import com.lfss.pgiapp.main.MainViewModel
 
 class ListOccurrencesFragment : Fragment() {
 
-    private val viewModel: ListOccurrencesViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
     private var _binding: FragmentListOccurrencesBinding? = null
     private val binding get() = _binding!!
