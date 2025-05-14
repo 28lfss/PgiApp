@@ -45,7 +45,12 @@ class LoginFragment : Fragment() {
             viewModel.userState.collectLatest { user ->
                 if (user != null) {
                     Toast.makeText(this@LoginFragment.activity, "Welcome, ${user.username}!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    startActivity(
+                        Intent(
+                            requireContext(), MainActivity::class.java).apply {
+                                putExtra("userId", user.userId)
+                        }
+                    )
                 } else {
                     Toast.makeText(this@LoginFragment.activity, "Login failed", Toast.LENGTH_SHORT).show()
                 }
