@@ -14,7 +14,7 @@ import com.lfss.pgiapp.databinding.FragmentLoginBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class LoginFragment : Fragment() {
+class   LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
 
@@ -35,7 +35,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.loginButton.setOnClickListener {
-            userLogin(
+            viewModel.userLogin(
                 binding.userIdContent.text.toString(),
                 binding.passwordContent.text.toString()
             )
@@ -48,7 +48,7 @@ class LoginFragment : Fragment() {
                     startActivity(
                         Intent(
                             requireContext(), MainActivity::class.java).apply {
-                                putExtra("userId", user.userId)
+                                putExtra("userId", user.userId.toString())
                         }
                     )
                 } else {
@@ -61,9 +61,5 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun userLogin(email: String, password: String) {
-        viewModel.userLogin(email, password)
     }
 }
