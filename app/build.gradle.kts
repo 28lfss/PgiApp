@@ -51,8 +51,9 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.zxing.android.embedded)
     implementation(libs.retrofit)
-    implementation (libs.converter.gson)
+    implementation(libs.converter.gson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.okhttp)
 }
