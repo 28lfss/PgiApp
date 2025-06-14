@@ -48,7 +48,7 @@ class   LoginFragment : Fragment() {
                     startActivity(
                         Intent(
                             requireContext(), MainActivity::class.java).apply {
-                                putExtra("userId", user.userId.toString())
+                                putExtra("sessionToken", user.userId.toString()) //TODO: get sessionToken from login response
                         }
                     )
                 } else {
