@@ -5,6 +5,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.lfss.pgiapp.R
 import com.lfss.pgiapp.model.OccurrenceModel
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class ListOccurrencesViewHolder(
     view: View
@@ -13,9 +16,12 @@ class ListOccurrencesViewHolder(
     val areaTextView: TextView = view.findViewById(R.id.adapter_area)
     val timeTextView: TextView = view.findViewById(R.id.adapter_time)
 
+    private val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy")
+        .withZone(ZoneId.systemDefault())
+
     fun bind(occurrence: OccurrenceModel, onItemClicked: () -> Unit) {
         areaTextView.text = occurrence.area
-        timeTextView.text = occurrence.timestamp.toString() //TODO: format timestamp to date/time
+        timeTextView.text = dateFormatter.format(Instant.ofEpochMilli(occurrence.timeCreated))
         itemView.setOnClickListener {
                 onItemClicked()
         }
