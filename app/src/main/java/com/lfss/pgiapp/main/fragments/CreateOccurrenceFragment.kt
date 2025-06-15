@@ -1,6 +1,7 @@
 package com.lfss.pgiapp.main.fragments
 
 import android.Manifest
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Bundle
@@ -15,9 +16,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.lfss.pgiapp.databinding.FragmentCreateOccurrenceBinding
 import com.lfss.pgiapp.main.MainViewModel
-import com.lfss.pgiapp.model.OccurrenceModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class CreateOccurrenceFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
@@ -90,24 +93,33 @@ class CreateOccurrenceFragment : Fragment() {
 
         binding.createOccurrenceButton.setOnClickListener {
             if (binding.occurrenceImage.drawable != null) { //TODO: Check if text inputs aren't empty
-                var createdOccurrence = OccurrenceModel(
-                    null, // ID will be appointed when added to the Database
-                    "USER UID",
+
+                viewModel.createOccurrence(
                     binding.occurrenceImage.drawable.toBitmap(),
                     binding.occurrenceAreaInput.text.toString(),
                     binding.occurrenceDescriptionInput.text.toString(),
-                    System.currentTimeMillis()
+                    activity?.getSharedPreferences("sessionPreference", Context.MODE_PRIVATE)
+                        ?.getLong("sessionToken", 0L)
                 )
-                viewModel.createOccurrence(createdOccurrence)
-                Toast.makeText(
-                    requireContext(), "Occurrence Created",
-                    Toast.LENGTH_SHORT
-                ).show()
             }
-            Toast.makeText(
-                requireContext(), "OCCURRENCE INCOMPLETE!!",
-                Toast.LENGTH_SHORT
-            ).show()
+        }
+
+        lifecycleScope.launch {
+            viewModel.occurrenceState.collectLatest { occurrence ->
+                if (occurrence != null) {
+                    Toast.makeText(
+                        this@CreateOccurrenceFragment.activity,
+                        "Occurrence created!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        this@CreateOccurrenceFragment.activity,
+                        "Error creating occurrence",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.lfss.pgiapp.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.lfss.pgiapp.MainActivity
 import com.lfss.pgiapp.databinding.FragmentLoginBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import androidx.core.content.edit
 
 class   LoginFragment : Fragment() {
 
@@ -45,11 +47,14 @@ class   LoginFragment : Fragment() {
             viewModel.userState.collectLatest { user ->
                 if (user != null) {
                     Toast.makeText(this@LoginFragment.activity, "Welcome, ${user.username}!", Toast.LENGTH_SHORT).show()
+
+                    activity?.getSharedPreferences("sessionPreference", Context.MODE_PRIVATE)?.edit {
+                        putLong("sessionToken", user.userId)
+                        apply()
+                    }
+
                     startActivity(
-                        Intent(
-                            requireContext(), MainActivity::class.java).apply {
-                                putExtra("sessionToken", user.userId.toString()) //TODO: get sessionToken from login response
-                        }
+                        Intent(requireContext(), MainActivity::class.java)
                     )
                 } else {
                     Toast.makeText(this@LoginFragment.activity, "Login failed", Toast.LENGTH_SHORT).show()

@@ -8,7 +8,7 @@ data class OccurrenceModel(
     val occurrenceId: Long?,
     val area: String,
     val description: String,
-    val imagePath: String,
-    val timeCreated: Long,
+    val imagePath: String?,
+    val timeCreated: Long?,
     val registrantId: Long
 ) : Parcelable
