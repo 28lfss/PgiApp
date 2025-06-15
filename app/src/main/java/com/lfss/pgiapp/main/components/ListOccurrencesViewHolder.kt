@@ -21,7 +21,12 @@ class ListOccurrencesViewHolder(
 
     fun bind(occurrence: OccurrenceModel, onItemClicked: () -> Unit) {
         areaTextView.text = occurrence.area
-        timeTextView.text = dateFormatter.format(Instant.ofEpochMilli(occurrence.timeCreated))
+        occurrence.timeCreated?.let { timeCreated->
+            timeTextView.text = dateFormatter.format(Instant.ofEpochMilli(timeCreated))
+        } ?: {
+            timeTextView.text = " "
+        }
+        timeTextView.text = dateFormatter.format(Instant.ofEpochMilli(occurrence.timeCreated!!))
         itemView.setOnClickListener {
                 onItemClicked()
         }
