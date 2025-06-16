@@ -1,5 +1,6 @@
 package com.lfss.pgiapp.main.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,21 +31,28 @@ class ListOccurrencesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter =
-            ListOccurrencesAdapter(viewModel.getUserOccurrencesList("user")) { occurrenceData ->
-                val bundle = Bundle().apply {
-                    putParcelable("occurrence", occurrenceData)
-                }
-                parentFragmentManager.setFragmentResult("request_key", bundle)
+        viewModel.getUserOccurrencesList(
+            activity?.getSharedPreferences("sessionPreference", Context.MODE_PRIVATE)
+                ?.getLong("sessionToken", 0L)
+        )
+        viewModel.listLiveData.observe(viewLifecycleOwner) { list ->
+                val adapter =
+                    ListOccurrencesAdapter(list) { occurrenceData ->
+                        val bundle = Bundle().apply {
+                            putParcelable("occurrence", occurrenceData)
+                        }
+                        parentFragmentManager.setFragmentResult("request_key", bundle)
 
-                parentFragmentManager.beginTransaction().replace(
-                    R.id.menu_frame_layout,
-                    ViewOccurrenceFragment()
-                ).addToBackStack(null).commit()
-            }
+                        parentFragmentManager.beginTransaction().replace(
+                            R.id.menu_frame_layout,
+                            ViewOccurrenceFragment()
+                        ).addToBackStack(null).commit()
+                    }
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = adapter
+            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            binding.recyclerView.adapter = adapter
+        }
+
     }
 
     override fun onDestroyView() {

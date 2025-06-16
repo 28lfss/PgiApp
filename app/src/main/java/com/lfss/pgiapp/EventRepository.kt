@@ -1,5 +1,6 @@
 package com.lfss.pgiapp
 
+import android.util.Log
 import com.lfss.pgiapp.api.PgiApi
 import com.lfss.pgiapp.api.RetrofitClient
 import com.lfss.pgiapp.dto.UserLoginDTO
@@ -39,15 +40,19 @@ class EventRepository {
         )
     }
 
-    fun occurrencesListByUid(userUid: String): List<OccurrenceModel> {
-        val occurrencesList = listOf<OccurrenceModel>(
-            OccurrenceModel(1, "AREA 1", "DESCRIPTION 1", "image_path", 12345, 1),
-            OccurrenceModel(2, "AREA 2", "DESCRIPTION 2", "image_path", 12345, 1),
-            OccurrenceModel(3, "AREA 3", "DESCRIPTION 3", "image_path", 12345, 1),
-            OccurrenceModel(4, "AREA 4", "DESCRIPTION 4", "image_path", 12345, 1),
-            OccurrenceModel(5, "AREA 5", "DESCRIPTION 5", "image_path", 12345, 1)
-        )
-        return occurrencesList //TODO: return List<OccurrenceModel>
+    suspend fun occurrencesListByUid(userId: Long): List<OccurrenceModel>? {
+        val response = api.getUserOccurrences(userId)
+        if (response.isSuccessful) {
+            val body = response.body()
+            if (body != null) {
+                return body
+            } else {
+                Log.e("OCCURRENCES LIST", "Response body is null")
+                throw IllegalArgumentException("Response body is null")
+            }
+        } else {
+            Log.e("OCCURRENCES LIST", "API call failed: ${response.errorBody()?.string()}")
+            throw IllegalArgumentException("API call failed with code: ${response.code()}")
+        }
     }
-
 }

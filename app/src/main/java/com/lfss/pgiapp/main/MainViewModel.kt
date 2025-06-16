@@ -2,6 +2,8 @@ package com.lfss.pgiapp.main
 
 import android.graphics.Bitmap
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lfss.pgiapp.EventRepository
@@ -20,6 +22,9 @@ class MainViewModel : ViewModel() {
 
     private val _occurrenceState = MutableStateFlow<OccurrenceModel?>(null)
     val occurrenceState: StateFlow<OccurrenceModel?> = _occurrenceState
+
+    private val _listLiveData = MutableLiveData<List<OccurrenceModel>>(emptyList())
+    val listLiveData: LiveData<List<OccurrenceModel>> = _listLiveData
 
     private fun bitmapToMultipart(bitmap: Bitmap): MultipartBody.Part {
         val stream = ByteArrayOutputStream()
@@ -49,8 +54,6 @@ class MainViewModel : ViewModel() {
                 val response =
                     eventRepository.createOccurrence(newOccurrence, bitmapToMultipart(imageBitmap))
 
-                Log.e("TEST", response.body().toString())
-
                 if (response.isSuccessful) {
                     response.body()?.let { body ->
                         _occurrenceState.value = body
@@ -64,7 +67,19 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getUserOccurrencesList(userUid: String): List<OccurrenceModel> {
-        return eventRepository.occurrencesListByUid(userUid)
+    fun getUserOccurrencesList(userId: Long?) {
+        viewModelScope.launch {
+            try {
+                if (userId == 0L || userId == null) {
+                    Log.e("OCCURRENCES LIST", "Session token is not available")
+                    throw IllegalArgumentException()
+                }
+                _listLiveData.value = eventRepository.occurrencesListByUid(userId)
+
+
+            } catch (e: Exception) {
+                Log.e("OCCURRENCES LIST", e.toString())
+            }
+        }
     }
 }
