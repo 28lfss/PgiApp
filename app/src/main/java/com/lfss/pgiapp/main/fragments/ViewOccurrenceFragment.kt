@@ -33,7 +33,6 @@ class ViewOccurrenceFragment : Fragment() {
             binding.occurrenceDate.text = viewModel.timestampToDateTime(occurrenceData?.timeCreated)
             binding.viewOccurrenceArea.text = occurrenceData?.area
             binding.viewOccurrenceDescription.text = occurrenceData?.description
-            Log.e("IMAGE PATH", occurrenceData?.imagePath.toString())
             Glide.with(this)
                 .load("https://pgi-backend.onrender.com/api/v1/file-storage?filename=${occurrenceData?.imagePath}")
                 .into(binding.image)
