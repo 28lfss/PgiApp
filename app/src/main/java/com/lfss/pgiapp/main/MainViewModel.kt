@@ -16,6 +16,9 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MainViewModel : ViewModel() {
     val eventRepository: EventRepository = EventRepository()
@@ -81,5 +84,14 @@ class MainViewModel : ViewModel() {
                 Log.e("OCCURRENCES LIST", e.toString())
             }
         }
+    }
+
+    fun timestampToDateTime(timestamp: Long?): String {
+        val formattedDate = timestamp?.let {
+            val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+            val date = Date(it)
+            sdf.format(date)
+        } ?: "Date not found"
+        return formattedDate
     }
 }

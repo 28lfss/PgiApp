@@ -16,7 +16,7 @@ class ListOccurrencesViewHolder(
     val areaTextView: TextView = view.findViewById(R.id.adapter_area)
     val timeTextView: TextView = view.findViewById(R.id.adapter_time)
 
-    private val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy")
+    private val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm")
         .withZone(ZoneId.systemDefault())
 
     fun bind(occurrence: OccurrenceModel, onItemClicked: () -> Unit) {

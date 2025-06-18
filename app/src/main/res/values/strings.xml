@@ -6,19 +6,17 @@
     <string name="list">LIST</string>
     <string name="qr_code">QR CODE</string>
 
-    <!-- LOGIN SCREEN -->
+    <!-- LOGIN FRAGMENT -->
     <string name="employee_id">ID</string>
     <string name="employee_password">PASSWORD</string>
     <string name="login_button">LOGIN</string>
 
-    <!-- CREATE OCCURRENCE -->
+    <!-- OCCURRENCE -->
+    <string name="occurrence_date">Date/Time</string>
     <string name="occurrence_area">Area/Local</string>
     <string name="occurrence_description">Occurrence Description</string>
     <string name="camera_image">CAMERA</string>
     <string name="gallery_image">GALLERY</string>
     <string name="occurrence_image">occurrence image</string>
-
-    <!-- QR CODE SCANNER -->
-    <string name="qr_code_scanner">SCANNER</string>
 
 </resources>
