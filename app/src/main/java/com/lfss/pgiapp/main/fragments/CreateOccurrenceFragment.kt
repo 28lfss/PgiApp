@@ -28,6 +28,8 @@ class CreateOccurrenceFragment : Fragment() {
     private var _binding: FragmentCreateOccurrenceBinding? = null
     private val binding get() = _binding!!
 
+    private var hasAttemptedCreation = false
+
     private lateinit var cameraPermissionRequestLauncher: ActivityResultLauncher<String>
     private lateinit var getCameraImage: ActivityResultLauncher<Void?>
     private lateinit var getGalleryImage: ActivityResultLauncher<PickVisualMediaRequest>
@@ -92,7 +94,11 @@ class CreateOccurrenceFragment : Fragment() {
         }
 
         binding.createOccurrenceButton.setOnClickListener {
-            if (binding.occurrenceImage.drawable != null) { //TODO: Check if text inputs aren't empty
+            if (binding.occurrenceImage.drawable != null &&
+                binding.occurrenceAreaInput.text?.isNotBlank() == true &&
+                binding.occurrenceDescriptionInput.text?.isNotBlank() == true
+            ) {
+                hasAttemptedCreation = true
 
                 viewModel.createOccurrence(
                     binding.occurrenceImage.drawable.toBitmap(),
@@ -101,23 +107,30 @@ class CreateOccurrenceFragment : Fragment() {
                     activity?.getSharedPreferences("sessionPreference", Context.MODE_PRIVATE)
                         ?.getLong("sessionToken", 0L)
                 )
+            } else {
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.occurrenceState.collectLatest { occurrence ->
-                if (occurrence != null) {
-                    Toast.makeText(
-                        this@CreateOccurrenceFragment.activity,
-                        "Occurrence created!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        this@CreateOccurrenceFragment.activity,
-                        "Error creating occurrence",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                if (hasAttemptedCreation) {
+                    if (occurrence != null) {
+                        Toast.makeText(
+                            this@CreateOccurrenceFragment.requireContext(),
+                            "Occurrence created!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        hasAttemptedCreation = false
+                    } else {
+                        Toast.makeText(
+                            this@CreateOccurrenceFragment.activity,
+                            "Error creating occurrence",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        hasAttemptedCreation = false
+                    }
                 }
             }
         }
